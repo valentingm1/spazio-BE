@@ -22,7 +22,20 @@ PASOS DEPLOY BACK-END:
 6. una vez creado el archivo guardar el mismo en .gitignore con la siguiente anotacion:
    .env
 
-7. Por ultimo, abrir workbench y crear una nueva base de datos utilizandoo este script y ejecutar en workbench:
+7. Tambien, se debe agregar la variable de entorno en el IDE.
+   Para intelliJ, EJEMPLO:
+
+- Abre tu proyecto en IntelliJ IDEA.
+- Ve al menú "Run" (Ejecutar) en la parte superior.
+- Selecciona "Editar configuraciones".
+- En la ventana de configuración que se abre, encontrarás la configuración de ejecución para tu aplicación Spring Boot.
+- Dentro de la configuración de ejecución, busca la sección "Environment" (Entorno).
+- En esta sección, verás una lista de variables de entorno definidas. Puedes agregar nuevas variables de entorno haciendo clic en el icono "+" o editar las existentes haciendo clic en ellas.
+- Ingresa el nombre y el valor de la variable de entorno que deseas configurar.
+- Haz clic en "OK" para guardar los cambios.
+
+8. Por ultimo, abrir workbench y crear una nueva base de datos utilizandoo este script y ejecutar en workbench:
+   Script SQL:
 
 -- Crear la base de datos
 CREATE DATABASE spazio_db;
@@ -30,15 +43,15 @@ CREATE DATABASE spazio_db;
 -- Usar la base de datos
 USE spazio_db;
 
-8. Finalmente, actualizar los esquemas del workbench y validar si se cargaron las tablas "lugar" y "foto".
-   En caso de ser asi, se configuro correctamente. Caso contrario comunicarse con alguno de los compañeros: valentin y ramiro
+9. Finalmente, actualizar los esquemas del workbench y validar si se cargaron las tablas "lugar" y "foto".
+   En caso de ser asi, se configuro correctamente. Caso contrario comunicarse con alguno de los compañeros: Valentin o Ramiro
 
 ---
 
 DATOS DE PROYECTO:
 PROYECTO_INTEGRADOR:
 NAME: "SPAZIO"
-BASE_DE_DATOS: "MYSQL, RELACIONAL"
+BASE_DE_DATOS: "MYSQL, RELACIONAL" URL: ""
 SPRING_BOOT_JAVA: "INICIADOR"
 
 PARTICIPANTES SINCRONIZADOS EN GITHUB:
