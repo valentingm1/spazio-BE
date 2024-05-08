@@ -1,12 +1,16 @@
-package com.backend.entity;
+package com.example.spazio.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "LUGARES")
+@Table(name = "lugares")
 public class Lugar {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
     private String nombre;
+    @Column
     private String descripcion;
 
     public Lugar(String nombre, String descripcion) {
