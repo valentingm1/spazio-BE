@@ -1,7 +1,46 @@
+PASOS DEPLOY BACK-END:
+
+1. Terminal:
+   git clone https://github.com/valentingm1/spazio-BE.git
+
+2. Agregar dentro de este archivo tu nombre completo y la rama que vas a utilizar:
+
+3. Terminal:
+   git init
+   git git add .
+   git commit -m "NombreCompleto, first commit"
+   git branch -M main
+   git remote add origin https://github.com/valentingm1/spazio-BE.git
+   git push -u origin main
+
+4. Luego de realizar el primer push, desde el IDE de preferencia y abrir el proyecto clonado.
+
+5. Crear un archivo .env con la siguiente estructura dentro de la carpeta raiz del proyecto:
+   ENV_USERNAME="nombre de usuario" cambiar por tu username, en general, root
+   ENV_PASSWORD="contraseña" cambiar por password, guardada cuando se instalo workbench
+
+6. una vez creado el archivo guardar el mismo en .gitignore con la siguiente anotacion:
+   .env
+
+7. Por ultimo, abrir workbench y crear una nueva base de datos utilizandoo este script y ejecutar en workbench:
+
+-- Crear la base de datos
+CREATE DATABASE spazio_db;
+
+-- Usar la base de datos
+USE spazio_db;
+
+8. Finalmente, actualizar los esquemas del workbench y validar si se cargaron las tablas "lugar" y "foto".
+   En caso de ser asi, se configuro correctamente. Caso contrario comunicarse con alguno de los compañeros: valentin y ramiro
+
+---
+
+DATOS DE PROYECTO:
 PROYECTO_INTEGRADOR:
-
 NAME: "SPAZIO"
-
 BASE_DE_DATOS: "MYSQL, RELACIONAL"
-
 SPRING_BOOT_JAVA: "INICIADOR"
+
+PARTICIPANTES SINCRONIZADOS EN GITHUB:
+VALENTIN
+RAMIRO ----------> branch: arceRamiro
