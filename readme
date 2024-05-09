@@ -16,13 +16,10 @@ PASOS DEPLOY BACK-END:
 4. Luego de realizar el primer push, desde el IDE de preferencia y abrir el proyecto clonado.
 
 5. Crear un archivo .env con la siguiente estructura dentro de la carpeta raiz del proyecto:
-   ENV_USERNAME="nombre de usuario" cambiar por tu username, en general, root
-   ENV_PASSWORD="contraseña" cambiar por password, guardada cuando se instalo workbench
+   ENV_USERNAME=admin
+   ENV_PASSWORD=equipo03
 
-6. una vez creado el archivo guardar el mismo en .gitignore con la siguiente anotacion:
-   .env
-
-7. Tambien, se debe agregar la variable de entorno en el IDE.
+6. Tambien, se debe agregar la variable de entorno en el IDE.
    Para intelliJ, EJEMPLO:
 
 - Abre tu proyecto en IntelliJ IDEA.
@@ -34,7 +31,9 @@ PASOS DEPLOY BACK-END:
 - Ingresa el nombre y el valor de la variable de entorno que deseas configurar.
 - Haz clic en "OK" para guardar los cambios.
 
-8. Por ultimo, abrir workbench y crear una nueva base de datos utilizandoo este script y ejecutar en workbench:
+8. agregar el .env a .git
+
+7. Por ultimo, abrir workbench y crear una nueva base de datos utilizandoo este script y ejecutar en workbench:
    Script SQL:
 
 -- Crear la base de datos
@@ -43,7 +42,7 @@ CREATE DATABASE spazio_db;
 -- Usar la base de datos
 USE spazio_db;
 
-9. Finalmente, actualizar los esquemas del workbench y validar si se cargaron las tablas "lugar" y "foto".
+8. Finalmente, actualizar los esquemas del workbench y validar si se cargaron las tablas "lugar" y "foto".
    En caso de ser asi, se configuro correctamente. Caso contrario comunicarse con alguno de los compañeros: Valentin o Ramiro
 
 ---
@@ -51,7 +50,7 @@ USE spazio_db;
 DATOS DE PROYECTO:
 PROYECTO_INTEGRADOR:
 NAME: "SPAZIO"
-BASE_DE_DATOS: "MYSQL, RELACIONAL" URL: "", PASSWORD: "equipo03"
+BASE_DE_DATOS: "MYSQL, RELACIONAL" URL: "database-spazio.ctka0aemsjdv.sa-east-1.rds.amazonaws.com", PASSWORD: "equipo03"
 SPRING_BOOT_JAVA: "INICIADOR"
 
 PARTICIPANTES SINCRONIZADOS EN GITHUB:
