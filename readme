@@ -33,7 +33,7 @@ PASOS DEPLOY BACK-END:
 
 8. agregar el .env a .git
 
-7. Por ultimo, abrir workbench y crear una nueva base de datos utilizandoo este script y ejecutar en workbench:
+9. Por ultimo, abrir workbench y crear una nueva base de datos utilizandoo este script y ejecutar en workbench:
    Script SQL:
 
 -- Crear la base de datos
@@ -56,3 +56,4 @@ SPRING_BOOT_JAVA: "INICIADOR"
 PARTICIPANTES SINCRONIZADOS EN GITHUB:
 VALENTIN
 RAMIRO ----------> branch: arceRamiro
+RAMIRO-DEPLOYS --> branch: RamAtlantic
