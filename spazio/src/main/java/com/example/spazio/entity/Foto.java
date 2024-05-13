@@ -7,32 +7,29 @@ import jakarta.persistence.*;
 public class Foto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @ManyToOne
-    @JoinColumn(name = "id_lugar")
-    private Lugar Lugar;
+    private Long id;
+
     @Column
     private String rutaFoto;
 
-    public Foto(com.example.spazio.entity.Lugar lugar, String rutaFoto) {
-        Lugar = lugar;
-        this.rutaFoto = rutaFoto;
+    @ManyToOne
+    @JoinColumn(name = "lugar_id")
+    private Lugar lugar_id;
+
+    public Foto() {
+        // Constructor vacío requerido por JPA
     }
 
-    public int getId() {
+    public Foto(String rutaFoto, Lugar lugar) {
+        this.rutaFoto = rutaFoto;
+        this.lugar_id = lugar;
+    }
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public com.example.spazio.entity.Lugar getLugar() {
-        return Lugar;
-    }
-
-    public void setLugar(com.example.spazio.entity.Lugar lugar) {
-        Lugar = lugar;
     }
 
     public String getRutaFoto() {
@@ -41,5 +38,13 @@ public class Foto {
 
     public void setRutaFoto(String rutaFoto) {
         this.rutaFoto = rutaFoto;
+    }
+
+    public Lugar getLugar() {
+        return lugar_id;
+    }
+
+    public void setLugar(Lugar lugar) {
+        this.lugar_id = lugar;
     }
 }

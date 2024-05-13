@@ -2,17 +2,15 @@ package com.example.spazio.dto.salidaDTO;
 
 public class FotoSalidaDTO {
     private Long id;
-    private String route;
-    private LugarSalidaDTO lugarSalidaDTO;
-
-
-    public FotoSalidaDTO(Long id, String route, LugarSalidaDTO lugarSalidaDTO) {
-        this.id = id;
-        this.route = route;
-        this.lugarSalidaDTO = lugarSalidaDTO;
-    }
+    private String rutaFoto;
+    private Long lugar_id; // ID del lugar al que pertenece la foto
 
     public FotoSalidaDTO() {
+    }
+
+    public FotoSalidaDTO(Long id, String rutaFoto) {
+        this.id = id;
+        this.rutaFoto = rutaFoto;
     }
 
     public Long getId() {
@@ -23,19 +21,19 @@ public class FotoSalidaDTO {
         this.id = id;
     }
 
-    public String getRoute() {
-        return route;
+    public String getRutaFoto() {
+        return rutaFoto;
     }
 
-    public void setRoute(String route) {
-        this.route = route;
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
     }
 
-    public LugarSalidaDTO getLugarSalidaDTO() {
-        return lugarSalidaDTO;
+    public Long getLugar() {
+        return lugar_id;
     }
 
-    public void setLugarSalidaDTO(LugarSalidaDTO lugarSalidaDTO) {
-        this.lugarSalidaDTO = lugarSalidaDTO;
+    public void setLugar(Long lugar_id) {
+        this.lugar_id = lugar_id;
     }
 }

@@ -6,6 +6,7 @@ import com.example.spazio.service.iLugarService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +26,8 @@ public class LugarController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<LugarSalidaDTO> agregarLugar(@RequestBody LugarEntradaDTO lugar){
-        return new ResponseEntity<>(LugarService.agregarLugar(lugar), HttpStatus.OK);
+    public ResponseEntity<LugarSalidaDTO> agregarLugar(@RequestBody @Validated LugarEntradaDTO lugar){
+        return new ResponseEntity<>(LugarService.agregarLugar(lugar), HttpStatus.CREATED);
     }
 
     @GetMapping("/listar")

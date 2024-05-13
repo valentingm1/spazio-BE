@@ -1,34 +1,32 @@
 package com.example.spazio.dto.entradaDTO;
 
-import java.util.List;
-
 public class FotoEntradaDTO {
-    private LugarEntradaDTO LugarEntradaDTO;
-    private List<String> fotos;
+
+    private String rutaFoto;
+    private Long lugar; // ID del lugar al que pertenece la foto
 
     public FotoEntradaDTO() {
     }
 
-    public FotoEntradaDTO(com.example.spazio.dto.entradaDTO.LugarEntradaDTO lugarEntradaDTO, List<String> fotos) {
-        LugarEntradaDTO = lugarEntradaDTO;
-        this.fotos = fotos;
+    public FotoEntradaDTO(String rutaFoto, Long lugar) {
+        this.rutaFoto = rutaFoto;
+        this.lugar = lugar;
     }
 
-    public com.example.spazio.dto.entradaDTO.LugarEntradaDTO getLugarEntradaDTO() {
-        return LugarEntradaDTO;
+    public String getRutaFoto() {
+        return rutaFoto;
     }
 
-    public void setLugarEntradaDTO(com.example.spazio.dto.entradaDTO.LugarEntradaDTO lugarEntradaDTO) {
-        LugarEntradaDTO = lugarEntradaDTO;
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
     }
 
-    public List<String> getFotos() {
-        return fotos;
+    public Long getLugarId() {
+        return lugar;
     }
 
-    public void setFotos(List<String> fotos) {
-        this.fotos = fotos;
+    public void setLugarId(Long lugar) {
+        this.lugar = lugar;
     }
 }
-
 
