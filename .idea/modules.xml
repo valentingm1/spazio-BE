@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/spazio/spazio.iml" filepath="$PROJECT_DIR$/spazio/spazio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spazio-BE.iml" filepath="$PROJECT_DIR$/.idea/spazio-BE.iml" />
+    </modules>
+  </component>
+</project>
