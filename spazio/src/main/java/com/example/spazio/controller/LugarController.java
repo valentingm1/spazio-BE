@@ -35,4 +35,9 @@ public class LugarController {
         return new ResponseEntity<>(LugarService.listarLugares(), HttpStatus.OK);
     }
 
+    @DeleteMapping("eliminar/{id}")
+    public ResponseEntity<?> eliminarLugar(@PathVariable Long id) {
+        LugarService.eliminarLugar(id);
+        return new ResponseEntity<>("Lugar eliminado correctamente", HttpStatus.OK);
+    }
 }
