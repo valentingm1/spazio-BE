@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6899ffa7-4487-401e-b870-ea6557ca922d" name="Changes" comment="" />
+    <list default="true" id="6899ffa7-4487-401e-b870-ea6557ca922d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +14,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -27,6 +32,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
@@ -42,6 +51,11 @@
 }]]></component>
   <component name="RunManager">
     <configuration name="SpazioApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="ENV_URL" value="database-spazio.ctka0aemsjdv.sa-east-1.rds.amazonaws.com" />
+        <env name="ENV_NAME" value="SPAZIO" />
+        <env name="ENV_PASSWORD" value="equipo03" />
+      </envs>
       <module name="spazio" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.spazio.SpazioApplication" />
       <method v="2">
@@ -58,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715658285354</updated>
       <workItem from="1715658286804" duration="69000" />
-      <workItem from="1715984000376" duration="480000" />
+      <workItem from="1715984000376" duration="2279000" />
     </task>
     <servers />
   </component>
