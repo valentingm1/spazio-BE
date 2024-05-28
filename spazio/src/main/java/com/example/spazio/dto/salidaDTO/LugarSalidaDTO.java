@@ -7,15 +7,25 @@ public class LugarSalidaDTO {
     private String nombre;
     private String descripcion;
     private List<FotoSalidaDTO> fotos;
+    private List<String> caracteristicas;
 
     public LugarSalidaDTO() {
     }
 
-    public LugarSalidaDTO(Long id, String nombre, String descripcion, List<FotoSalidaDTO> fotos) {
+    public LugarSalidaDTO(Long id, String nombre, String descripcion, List<FotoSalidaDTO> fotos, List<String> caracteristicas) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fotos = fotos;
+        this.caracteristicas = caracteristicas;
+    }
+
+    public List<String> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(List<String> caracteristicas) {
+        this.caracteristicas = caracteristicas;
     }
 
     public Long getId() {
@@ -48,5 +58,16 @@ public class LugarSalidaDTO {
 
     public void setFotos(List<FotoSalidaDTO> fotos) {
         this.fotos = fotos;
+    }
+
+    @Override
+    public String toString() {
+        return "LugarSalidaDTO{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", fotos=" + fotos +
+                ", caracteristicas=" + caracteristicas +
+                '}';
     }
 }

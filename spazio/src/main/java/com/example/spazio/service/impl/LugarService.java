@@ -1,6 +1,7 @@
 package com.example.spazio.service.impl;
 
 import com.example.spazio.dto.entradaDTO.LugarEntradaDTO;
+import com.example.spazio.dto.modDTO.LugarModEntradaDTO;
 import com.example.spazio.dto.salidaDTO.LugarSalidaDTO;
 import com.example.spazio.entity.Lugar;
 import com.example.spazio.repository.LugarRepository;
@@ -64,6 +65,29 @@ public class LugarService implements iLugarService {
         });
     }
 
+    @Override
+    public LugarSalidaDTO actualizarLugar(LugarModEntradaDTO lugar) {
+        Lugar LugarRecibido = modelMapper.map(lugar, Lugar.class);
+        Lugar LugarAActualizar = lugarRepository.findById(LugarRecibido.getId()).orElse(null);
+
+        LugarSalidaDTO LugarSalidaDto = null;
+
+        if (LugarAActualizar != null) {
+            LugarAActualizar = LugarRecibido;
+            lugarRepository.save(LugarAActualizar);
+
+            LugarSalidaDto = modelMapper.map(LugarAActualizar, LugarSalidaDTO.class);
+            LOGGER.warn("Paciente actualizado: {}", LugarSalidaDto.toString());
+
+        } else {
+            LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
+            //lanzar excepcion correspondiente
+        }
+
+
+        return LugarSalidaDto;
+    }
+
     private void configureMapping() {
         // Mapeo de LugarEntradaDTO a Lugar
         modelMapper.typeMap(LugarEntradaDTO.class, Lugar.class)
@@ -73,8 +97,6 @@ public class LugarService implements iLugarService {
         modelMapper.typeMap(Lugar.class, LugarSalidaDTO.class)
                 .addMapping(src -> src.getId(), LugarSalidaDTO::setId) // Mapeo del ID del lugar
                 .addMapping(Lugar::getFotos, LugarSalidaDTO::setFotos);
-
-
 
     }
 

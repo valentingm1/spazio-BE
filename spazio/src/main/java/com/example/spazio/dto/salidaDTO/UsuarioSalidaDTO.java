@@ -65,5 +65,14 @@ public class UsuarioSalidaDTO {
         this.email = email;
     }
 
-
+    @Override
+    public String toString() {
+        return "UsuarioSalidaDTO{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", email='" + email + '\'' +
+                ", tipoUsuario='" + tipoUsuario + '\'' +
+                '}';
+    }
 }

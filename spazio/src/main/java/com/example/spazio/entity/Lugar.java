@@ -1,6 +1,9 @@
 package com.example.spazio.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -11,26 +14,31 @@ public class Lugar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @NotBlank(message = "Nombre no puede estar en blanco")
     private String nombre;
-
-    @Column
     private String descripcion;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "lugar_id")
     private List<Foto> fotos;
 
+    @Nullable
+    private List<String> caracteristicas;
+
+//    @ManyToOne
+//    @JoinColumn(name = "categoriaLugar_id")
+//    private CategoriaLugar categoriaLugar;
+
     public Lugar() {
         // Constructor vacío requerido por JPA
     }
 
-    public Lugar(String nombre, String descripcion, List<Foto> fotos) {
+    public Lugar(String nombre, String descripcion, List<Foto> fotos, List<String> caracteristicas) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fotos = fotos;
+        this.caracteristicas = caracteristicas;
     }
-
 
     public Long getId() {
         return id;
@@ -63,4 +71,13 @@ public class Lugar {
     public void setFotos(List<Foto> fotos) {
         this.fotos = fotos;
     }
+
+    public List<String> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(List<String> caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
 }
