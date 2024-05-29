@@ -1,6 +1,7 @@
 package com.example.spazio.controller;
 
 import com.example.spazio.dto.entradaDTO.LugarEntradaDTO;
+import com.example.spazio.dto.modDTO.LugarModEntradaDTO;
 import com.example.spazio.dto.salidaDTO.LugarSalidaDTO;
 import com.example.spazio.service.iLugarService;
 import org.springframework.http.HttpStatus;
@@ -35,4 +36,13 @@ public class LugarController {
         return new ResponseEntity<>(LugarService.listarLugares(), HttpStatus.OK);
     }
 
+    @DeleteMapping("eliminar/{id}")
+    public ResponseEntity<?> eliminarLugar(@PathVariable Long id) {
+        LugarService.eliminarLugar(id);
+        return new ResponseEntity<>("Lugar eliminado correctamente", HttpStatus.OK);
+    }
+    @PutMapping("/actualizar")
+    public LugarSalidaDTO actualizarLugar(@RequestBody LugarModEntradaDTO lugar) {
+        return LugarService.actualizarLugar(lugar);
+    }
 }

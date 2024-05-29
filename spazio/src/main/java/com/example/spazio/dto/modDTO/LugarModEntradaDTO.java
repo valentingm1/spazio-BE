@@ -1,12 +1,17 @@
-package com.example.spazio.dto.entradaDTO;
+package com.example.spazio.dto.modDTO;
 
+import com.example.spazio.dto.entradaDTO.FotoEntradaDTO;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
-public class LugarEntradaDTO {
+public class LugarModEntradaDTO {
+
+    @NotNull(message = "Debe proveerse el id del lugar que se desea modificar")
+    private Long id;
+
     @NotNull
     @Size(min = 5, message = "El nombre debe tener al menos 5 letras")
     @NotEmpty
@@ -28,15 +33,24 @@ public class LugarEntradaDTO {
     @NotEmpty(message = "Debe haber por lo menos una categoria")
     private List<Long> categoriaIds; // IDs de las categorías asociadas
 
-    public LugarEntradaDTO() {
+    public LugarModEntradaDTO() {
     }
 
-    public LugarEntradaDTO(String nombre, String descripcion, List<FotoEntradaDTO> fotos, List<String> caracteristicas, List<Long> categoriaIds) {
+    public LugarModEntradaDTO(Long id, String nombre, String descripcion, List<FotoEntradaDTO> fotos, List<String> caracteristicas, List<Long> categoriaIds) {
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
         this.categoriaIds = categoriaIds;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -59,10 +73,14 @@ public class LugarEntradaDTO {
         return fotos;
     }
 
+
     public void setFotos(List<FotoEntradaDTO> fotos) {
         this.fotos = fotos;
     }
 
+    public List<String> getCaracteristicas() {
+        return caracteristicas;
+    }
 
     public List<Long> getCategoriaIds() {
         return categoriaIds;
@@ -72,19 +90,18 @@ public class LugarEntradaDTO {
         this.categoriaIds = categoriaIds;
     }
 
-    public List<String> getCaracteristicas() {
-        return caracteristicas;
-    }
-
     public void setCaracteristicas(List<String> caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
 
     @Override
     public String toString() {
-        return "LugarEntradaDTO{" +
-                "nombre='" + nombre + '\'' +
+        return "LugarModEntradaDTO{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
+                ", fotos=" + fotos +
+                ", caracteristicas=" + caracteristicas +
                 '}';
     }
 }
