@@ -3,7 +3,9 @@ package com.example.spazio.service.impl;
 import com.example.spazio.dto.entradaDTO.LugarEntradaDTO;
 import com.example.spazio.dto.modDTO.LugarModEntradaDTO;
 import com.example.spazio.dto.salidaDTO.LugarSalidaDTO;
+import com.example.spazio.entity.Categoria;
 import com.example.spazio.entity.Lugar;
+import com.example.spazio.repository.CategoriaRepository;
 import com.example.spazio.repository.LugarRepository;
 import com.example.spazio.service.iLugarService;
 import org.modelmapper.ModelMapper;
@@ -19,10 +21,12 @@ public class LugarService implements iLugarService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(LugarService.class);
     private final LugarRepository lugarRepository;
+    private final CategoriaRepository categoriaRepository;
     private final ModelMapper modelMapper;
 
-    public LugarService(LugarRepository lugarRepository, ModelMapper modelMapper) {
+    public LugarService(LugarRepository lugarRepository, CategoriaRepository categoriaRepository, ModelMapper modelMapper) {
         this.lugarRepository = lugarRepository;
+        this.categoriaRepository = categoriaRepository;
         this.modelMapper = modelMapper;
         configureMapping();
     }
@@ -30,7 +34,16 @@ public class LugarService implements iLugarService {
     @Override
     public LugarSalidaDTO agregarLugar(LugarEntradaDTO lugarDto) {
         LOGGER.info("Agregando lugar: {}", lugarDto.toString());
+
         Lugar lugar = modelMapper.map(lugarDto, Lugar.class);
+
+        // Convertir IDs de categorías a entidades de categorías
+        List<Categoria> categorias = lugarDto.getCategorias().stream()
+                .map(categoriaRepository::findById)
+                .map(optionalCategoria -> optionalCategoria.orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada")))
+                .collect(Collectors.toList());
+        lugar.setCategorias(categorias);
+
         Lugar lugarPersistido = lugarRepository.save(lugar);
         LugarSalidaDTO lugarSalidaDTO = modelMapper.map(lugarPersistido, LugarSalidaDTO.class);
         LOGGER.info("Lugar agregado exitosamente: {}", lugarSalidaDTO.toString());

@@ -35,12 +35,14 @@ public class Lugar {
         // Constructor vacío requerido por JPA
     }
 
-    public Lugar(String nombre, String descripcion, List<Foto> fotos, List<String> caracteristicas) {
+    public Lugar(String nombre, String descripcion, List<Foto> fotos, List<String> caracteristicas, List<Categoria> categorias) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
+        this.categorias = categorias;
     }
+
 
     public Long getId() {
         return id;
@@ -82,4 +84,12 @@ public class Lugar {
         this.caracteristicas = caracteristicas;
     }
 
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
 }

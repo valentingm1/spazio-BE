@@ -19,6 +19,9 @@ public class Categoria {
     private List<Lugar> lugares;
 
 
+    public Categoria() {
+    }
+
     public Categoria(String nombre) {
         this.nombre = nombre;
     }
@@ -31,4 +34,20 @@ public class Categoria {
         this.nombre = nombre;
     }
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Lugar> getLugares() {
+        return lugares;
+    }
+
+    public void setLugares(List<Lugar> lugares) {
+        this.lugares = lugares;
+    }
 }
