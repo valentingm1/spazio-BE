@@ -8,12 +8,15 @@ import java.util.List;
 @Table(name = "categorias")
 public class Categoria {
 
-    @Column(length = 50)
-    private String nombre;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
+    @Column(length = 50)
+    private String nombre;
+
+
 
     @ManyToMany(mappedBy = "categorias")
     private List<Lugar> lugares;
@@ -22,8 +25,9 @@ public class Categoria {
     public Categoria() {
     }
 
-    public Categoria(String nombre) {
+    public Categoria(String nombre, List<Lugar> lugares) {
         this.nombre = nombre;
+        this.lugares = lugares;
     }
 
     public String getNombre() {

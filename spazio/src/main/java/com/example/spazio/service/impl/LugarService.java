@@ -31,7 +31,6 @@ public class LugarService implements iLugarService {
         configureMapping();
     }
 
-    @Override
     public LugarSalidaDTO agregarLugar(LugarEntradaDTO lugarDto) {
         LOGGER.info("Agregando lugar: {}", lugarDto.toString());
 
