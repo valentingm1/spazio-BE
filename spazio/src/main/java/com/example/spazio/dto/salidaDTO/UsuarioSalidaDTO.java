@@ -14,16 +14,19 @@ public class UsuarioSalidaDTO {
 
     private String tipoUsuario;
 
+    private String firebase;
+
     public UsuarioSalidaDTO() {
     }
 
-    public UsuarioSalidaDTO(Long id, String nombre, String apellido, String email) {
+    public UsuarioSalidaDTO(Long id, String nombre, String apellido, String email, String tipoUsuario, String firebase) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.tipoUsuario = tipoUsuario;
+        this.firebase = firebase;
     }
-
 
     public String getTipoUsuario() {
         return tipoUsuario;
@@ -65,5 +68,11 @@ public class UsuarioSalidaDTO {
         this.email = email;
     }
 
+    public String getFirebase() {
+        return firebase;
+    }
 
+    public void setFirebase(String firebase) {
+        this.firebase = firebase;
+    }
 }

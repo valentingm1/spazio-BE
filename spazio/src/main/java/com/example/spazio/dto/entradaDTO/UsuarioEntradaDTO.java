@@ -22,14 +22,19 @@ public class UsuarioEntradaDTO {
     @Size(min = 8, message = "Contraseña debe tener por lo menos 8 caracteres")
     private String password;
 
+    @NotBlank(message = "idFirebase no puede estar en blanco")
+    @Size(min = 8, message = "idFirebase debe tener por lo menos 8 caracteres")
+    private String firebase;
+
     public UsuarioEntradaDTO() {
     }
 
-    public UsuarioEntradaDTO(String nombre, String apellido, String email, String password) {
+    public UsuarioEntradaDTO(String nombre, String apellido, String email, String password, String firebase) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
+        this.firebase = firebase;
     }
 
     public String getNombre() {
@@ -62,5 +67,13 @@ public class UsuarioEntradaDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirebase() {
+        return firebase;
+    }
+
+    public void setFirebase(String firebase) {
+        this.firebase = firebase;
     }
 }

@@ -30,6 +30,24 @@ public class Usuario {
     @Size(min = 8, message = "Contraseña debe tener por lo menos 8 caracteres")
     private String password;
 
+    @NotBlank(message = "idFirebase no puede estar en blanco")
+    @Size(min = 8, message = "idFirebase debe tener por lo menos 8 caracteres")
+    private String firebase;
+
+
+    public Usuario(Long id, String nombre, String apellido, String email, String password, String firebase, @Nullable String tipoUsuario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.password = password;
+        this.firebase = firebase;
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Usuario() {
+    }
+
     @Nullable
     private String tipoUsuario;
 
@@ -79,5 +97,13 @@ public class Usuario {
 
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public String getFirebase() {
+        return firebase;
+    }
+
+    public void setFirebase(String firebase) {
+        this.firebase = firebase;
     }
 }
