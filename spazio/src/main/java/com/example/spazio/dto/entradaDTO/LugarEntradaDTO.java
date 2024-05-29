@@ -24,14 +24,19 @@ public class LugarEntradaDTO {
     @NotEmpty(message = "Debe contener por lo menos una caracteristica")
     private List<String> caracteristicas;
 
+    @NotNull(message ="Las categorias no pueden ser nulas")
+    @NotEmpty(message = "Debe haber por lo menos una categoria")
+    private List<Long> categoriaIds; // IDs de las categorías asociadas
+
     public LugarEntradaDTO() {
     }
 
-    public LugarEntradaDTO(String nombre, String descripcion, List<FotoEntradaDTO> fotos, List<String> caracteristicas) {
+    public LugarEntradaDTO(String nombre, String descripcion, List<FotoEntradaDTO> fotos, List<String> caracteristicas, List<Long> categoriaIds) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
+        this.categoriaIds = categoriaIds;
     }
 
     public String getNombre() {
@@ -56,6 +61,15 @@ public class LugarEntradaDTO {
 
     public void setFotos(List<FotoEntradaDTO> fotos) {
         this.fotos = fotos;
+    }
+
+
+    public List<Long> getCategoriaIds() {
+        return categoriaIds;
+    }
+
+    public void setCategoriaIds(List<Long> categoriaIds) {
+        this.categoriaIds = categoriaIds;
     }
 
     public List<String> getCaracteristicas() {

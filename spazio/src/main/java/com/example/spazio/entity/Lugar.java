@@ -3,7 +3,6 @@ package com.example.spazio.entity;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -25,9 +24,12 @@ public class Lugar {
     @Nullable
     private List<String> caracteristicas;
 
-//    @ManyToOne
-//    @JoinColumn(name = "categoriaLugar_id")
-//    private CategoriaLugar categoriaLugar;
+    @ManyToMany
+    @JoinTable(
+            name = "lugar_categoria",
+            joinColumns = @JoinColumn(name = "lugar_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    private List<Categoria> categorias;
 
     public Lugar() {
         // Constructor vacío requerido por JPA
