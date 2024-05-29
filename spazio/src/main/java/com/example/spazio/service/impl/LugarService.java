@@ -3,8 +3,10 @@ package com.example.spazio.service.impl;
 import com.example.spazio.dto.entradaDTO.LugarEntradaDTO;
 import com.example.spazio.dto.modDTO.LugarModEntradaDTO;
 import com.example.spazio.dto.salidaDTO.LugarSalidaDTO;
+import com.example.spazio.entity.Caracteristica;
 import com.example.spazio.entity.Categoria;
 import com.example.spazio.entity.Lugar;
+import com.example.spazio.repository.CaracteristicaRepository;
 import com.example.spazio.repository.CategoriaRepository;
 import com.example.spazio.repository.LugarRepository;
 import com.example.spazio.service.iLugarService;
@@ -22,11 +24,13 @@ public class LugarService implements iLugarService {
     private final Logger LOGGER = LoggerFactory.getLogger(LugarService.class);
     private final LugarRepository lugarRepository;
     private final CategoriaRepository categoriaRepository;
+    private final CaracteristicaRepository caracteristicaRepository;
     private final ModelMapper modelMapper;
 
-    public LugarService(LugarRepository lugarRepository, CategoriaRepository categoriaRepository, ModelMapper modelMapper) {
+    public LugarService(LugarRepository lugarRepository, CategoriaRepository categoriaRepository, CaracteristicaRepository caracteristicaRepository, ModelMapper modelMapper) {
         this.lugarRepository = lugarRepository;
         this.categoriaRepository = categoriaRepository;
+        this.caracteristicaRepository = caracteristicaRepository;
         this.modelMapper = modelMapper;
         configureMapping();
     }
@@ -42,6 +46,12 @@ public class LugarService implements iLugarService {
                         .orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada")))
                 .collect(Collectors.toList());
         lugar.setCategorias(categorias);
+
+        List<Caracteristica> caracteristicas = lugarDto.getCaracteristicas().stream()
+                .map(caracteristicaId -> caracteristicaRepository.findById(caracteristicaId)
+                        .orElseThrow(() -> new IllegalArgumentException("Característica no encontrada con ID: " + caracteristicaId)))
+                .collect(Collectors.toList());
+        lugar.setCaracteristicas(caracteristicas);
 
         Lugar lugarPersistido = lugarRepository.save(lugar);
         LugarSalidaDTO lugarSalidaDTO = modelMapper.map(lugarPersistido, LugarSalidaDTO.class);
