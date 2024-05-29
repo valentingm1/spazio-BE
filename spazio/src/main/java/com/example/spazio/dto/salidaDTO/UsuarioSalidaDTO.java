@@ -68,11 +68,13 @@ public class UsuarioSalidaDTO {
         this.email = email;
     }
 
+
     public String getFirebase() {
         return firebase;
     }
 
     public void setFirebase(String firebase) {
         this.firebase = firebase;
+
     }
 }

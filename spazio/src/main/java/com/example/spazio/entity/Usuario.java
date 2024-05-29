@@ -14,21 +14,11 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Nombre no puede estar en blanco")
-    @Size(min = 2, max = 30)
     private String nombre;
-
-    @NotBlank(message = "Apellido no puede estar en blanco")
-    @Size(min = 2, max = 50)
     private String apellido;
-
-    @NotBlank(message = "Email no puede estar en blanco")
-    @Email(message = "Email deberia ser un email válido")
     private String email;
-
-    @NotBlank(message = "Contraseña no puede estar en blanco")
-    @Size(min = 8, message = "Contraseña debe tener por lo menos 8 caracteres")
     private String password;
+
 
     @NotBlank(message = "idFirebase no puede estar en blanco")
     @Size(min = 8, message = "idFirebase debe tener por lo menos 8 caracteres")
@@ -48,8 +38,18 @@ public class Usuario {
     public Usuario() {
     }
 
-    @Nullable
+
+    @Nullable // Solución parche a tipos de usuario
     private String tipoUsuario;
+
+
+    public Usuario(String nombre, String apellido, String email, String password, String tipoUsuario) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.password = password;
+        this.tipoUsuario = tipoUsuario;
+    }
 
     public String getNombre() {
         return nombre;
