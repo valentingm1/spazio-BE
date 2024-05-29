@@ -38,8 +38,8 @@ public class LugarService implements iLugarService {
 
         // Convertir IDs de categorías a entidades de categorías
         List<Categoria> categorias = lugarDto.getCategorias().stream()
-                .map(categoriaRepository::findById)
-                .map(optionalCategoria -> optionalCategoria.orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada")))
+                .map(categoriaId -> categoriaRepository.findById(categoriaId)
+                        .orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada")))
                 .collect(Collectors.toList());
         lugar.setCategorias(categorias);
 

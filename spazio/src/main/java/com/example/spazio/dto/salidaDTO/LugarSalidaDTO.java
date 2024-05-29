@@ -8,12 +8,12 @@ public class LugarSalidaDTO {
     private String descripcion;
     private List<FotoSalidaDTO> fotos;
     private List<String> caracteristicas;
-    private List<Long> categorias;
+    private List<CategoriaSalidaDTO> categorias;
 
     public LugarSalidaDTO() {
     }
 
-    public LugarSalidaDTO(Long id, String nombre, String descripcion, List<FotoSalidaDTO> fotos, List<String> caracteristicas, List<Long> categorias) {
+    public LugarSalidaDTO(Long id, String nombre, String descripcion, List<FotoSalidaDTO> fotos, List<String> caracteristicas, List<CategoriaSalidaDTO> categorias) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -62,11 +62,11 @@ public class LugarSalidaDTO {
         this.fotos = fotos;
     }
 
-    public List<Long> getCategorias() {
+    public List<CategoriaSalidaDTO> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(List<Long> categorias) {
+    public void setCategorias(List<CategoriaSalidaDTO> categorias) {
         this.categorias = categorias;
     }
 
