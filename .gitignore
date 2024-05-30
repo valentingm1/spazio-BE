@@ -1,3 +1,4 @@
 .env
 spazio/src/main/resources/application.properties
 .idea/
+.idea/workspace.xml
