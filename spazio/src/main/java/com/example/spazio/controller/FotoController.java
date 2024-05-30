@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.*;
 public class FotoController {
     private final iFotoService fotoService;
 
+
+
     public FotoController(iFotoService fotoService) {
         this.fotoService = fotoService;
     }
+
 
     @PostMapping("/agregar")
     public ResponseEntity<FotoSalidaDTO> agregarFoto(@RequestBody FotoEntradaDTO foto) {
