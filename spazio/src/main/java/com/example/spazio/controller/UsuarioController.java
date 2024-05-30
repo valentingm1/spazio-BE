@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -18,7 +19,6 @@ public class UsuarioController {
 
     private iUsuarioService UsuarioService;
 
-
     public UsuarioController(iUsuarioService usuarioService) {
         UsuarioService = usuarioService;
     }
@@ -28,14 +28,20 @@ public class UsuarioController {
         return new ResponseEntity<>(UsuarioService.agregarUsuario(usuarioEntradaDTO), HttpStatus.CREATED);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioSalidaDTO> buscarUsuarioPorId(@PathVariable Long id){
+        return new ResponseEntity<>(UsuarioService.buscarUsuarioPorId(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/email/{email}")
+    @CrossOrigin(origins = "http://localhost:8080")
+    public ResponseEntity<UsuarioSalidaDTO> buscarUsuarioPorEmail(@PathVariable String email){
+        return new ResponseEntity<>(UsuarioService.buscarUsuarioPorEmail(email), HttpStatus.OK);
+    }
+
     @GetMapping("/listar")
     public ResponseEntity<List<UsuarioSalidaDTO>> listarUsuarios(){
         return new ResponseEntity<>(UsuarioService.listarUsuarios(), HttpStatus.OK);
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity<UsuarioSalidaDTO> buscarUsuarioPorId(@PathVariable Long id){
-        return new ResponseEntity<>(UsuarioService.buscarUsuarioPorId(id), HttpStatus.OK);
     }
 
     @DeleteMapping("eliminar/{id}")
