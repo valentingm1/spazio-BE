@@ -5,6 +5,7 @@ import com.example.spazio.dto.modDTO.LugarModEntradaDTO;
 import com.example.spazio.dto.salidaDTO.LugarSalidaDTO;
 import com.example.spazio.entity.Caracteristica;
 import com.example.spazio.entity.Categoria;
+import com.example.spazio.entity.Foto;
 import com.example.spazio.entity.Lugar;
 import com.example.spazio.repository.CaracteristicaRepository;
 import com.example.spazio.repository.CategoriaRepository;
@@ -88,27 +89,48 @@ public class LugarService implements iLugarService {
     }
 
     @Override
-    public LugarSalidaDTO actualizarLugar(LugarModEntradaDTO lugar) {
-        Lugar LugarRecibido = modelMapper.map(lugar, Lugar.class);
-        Lugar LugarAActualizar = lugarRepository.findById(LugarRecibido.getId()).orElse(null);
+    public LugarSalidaDTO actualizarLugar(LugarModEntradaDTO lugarModDto) {
+        Long id = lugarModDto.getId();
+        LOGGER.info("Actualizando lugar con ID: {}", id);
 
-        LugarSalidaDTO LugarSalidaDto = null;
+        Lugar lugarExistente = lugarRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Lugar no encontrado con ID: " + id));
 
-        if (LugarAActualizar != null) {
-            LugarAActualizar = LugarRecibido;
-            lugarRepository.save(LugarAActualizar);
-
-            LugarSalidaDto = modelMapper.map(LugarAActualizar, LugarSalidaDTO.class);
-            LOGGER.warn("Paciente actualizado: {}", LugarSalidaDto.toString());
-
-        } else {
-            LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
-            //lanzar excepcion correspondiente
+        // Actualizar los campos del lugar existente con los valores del DTO
+        if (lugarModDto.getNombre() != null) {
+            lugarExistente.setNombre(lugarModDto.getNombre());
+        }
+        if (lugarModDto.getDescripcion() != null) {
+            lugarExistente.setDescripcion(lugarModDto.getDescripcion());
         }
 
+        // Convertir IDs de categorías a entidades de categorías
+        if (lugarModDto.getCategorias() != null) {
+            List<Categoria> categorias = lugarModDto.getCategorias().stream()
+                    .map(categoriaId -> categoriaRepository.findById(categoriaId)
+                            .orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada con ID: " + categoriaId)))
+                    .collect(Collectors.toList());
+            lugarExistente.setCategorias(categorias);
+        }
 
-        return LugarSalidaDto;
+        // Convertir IDs de características a entidades de características
+        if (lugarModDto.getCaracteristicas() != null) {
+            List<Caracteristica> caracteristicas = lugarModDto.getCaracteristicas().stream()
+                    .map(caracteristicaId -> caracteristicaRepository.findById(caracteristicaId)
+                            .orElseThrow(() -> new IllegalArgumentException("Característica no encontrada con ID: " + caracteristicaId)))
+                    .collect(Collectors.toList());
+            lugarExistente.setCaracteristicas(caracteristicas);
+        }
+
+        // Actualizar las fotos existentes
+
+
+        Lugar lugarActualizado = lugarRepository.save(lugarExistente);
+        LugarSalidaDTO lugarSalidaDTO = modelMapper.map(lugarActualizado, LugarSalidaDTO.class);
+        LOGGER.info("Lugar actualizado exitosamente: {}", lugarSalidaDTO.toString());
+        return lugarSalidaDTO;
     }
+
 
     private void configureMapping() {
         // Mapeo de LugarEntradaDTO a Lugar

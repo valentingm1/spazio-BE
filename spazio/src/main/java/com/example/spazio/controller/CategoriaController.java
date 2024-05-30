@@ -1,6 +1,7 @@
 package com.example.spazio.controller;
 
 import com.example.spazio.dto.entradaDTO.CategoriaEntradaDTO;
+import com.example.spazio.dto.modDTO.CategoriaModEntradaDTO;
 import com.example.spazio.dto.salidaDTO.CategoriaSalidaDTO;
 import com.example.spazio.service.iCategoriaService;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,11 @@ public class CategoriaController {
     public ResponseEntity<String> eliminarCategoria(@PathVariable Long id) {
         categoriaService.eliminarCategoria(id);
         return new ResponseEntity<>("Categoría eliminada correctamente", HttpStatus.OK);
+    }
+
+    @PutMapping("/actualizar")
+    public ResponseEntity<CategoriaSalidaDTO> actualizarCategoria(@RequestBody @Validated CategoriaModEntradaDTO categoriaModDto) {
+        return new ResponseEntity<>(categoriaService.actualizarCategoria(categoriaModDto), HttpStatus.OK);
     }
 
 }

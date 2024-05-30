@@ -1,6 +1,7 @@
 package com.example.spazio.service;
 
 import com.example.spazio.dto.entradaDTO.CategoriaEntradaDTO;
+import com.example.spazio.dto.modDTO.CategoriaModEntradaDTO;
 import com.example.spazio.dto.salidaDTO.CategoriaSalidaDTO;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface iCategoriaService {
 
     void eliminarCategoria(Long id);
 
+    CategoriaSalidaDTO actualizarCategoria(CategoriaModEntradaDTO categoriaModDto);
 }

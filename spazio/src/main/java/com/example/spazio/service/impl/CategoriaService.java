@@ -1,6 +1,7 @@
 package com.example.spazio.service.impl;
 
 import com.example.spazio.dto.entradaDTO.CategoriaEntradaDTO;
+import com.example.spazio.dto.modDTO.CategoriaModEntradaDTO;
 import com.example.spazio.dto.salidaDTO.CategoriaSalidaDTO;
 import com.example.spazio.entity.Categoria;
 import com.example.spazio.repository.CategoriaRepository;
@@ -61,6 +62,23 @@ public class CategoriaService implements iCategoriaService {
             categoriaRepository.delete(categoria);
             LOGGER.info("Categoria eliminada exitosamente");
         });
+    }
+    @Override
+    public CategoriaSalidaDTO actualizarCategoria(CategoriaModEntradaDTO categoriaModDto) {
+        Long id = categoriaModDto.getId();
+        LOGGER.info("Actualizando categoria con ID: {}", id);
+
+        Categoria categoriaExistente = categoriaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada con ID: " + id));
+
+        // Actualizar los campos del categoriaExistente con los valores del DTO
+        modelMapper.map(categoriaModDto, categoriaExistente);
+
+        Categoria categoriaActualizada = categoriaRepository.save(categoriaExistente);
+        CategoriaSalidaDTO categoriaSalidaDTO = modelMapper.map(categoriaActualizada, CategoriaSalidaDTO.class);
+
+        LOGGER.info("Categoria actualizada exitosamente: {}", categoriaSalidaDTO.toString());
+        return categoriaSalidaDTO;
     }
 
 }

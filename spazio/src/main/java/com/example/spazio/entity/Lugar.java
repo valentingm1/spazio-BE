@@ -17,8 +17,7 @@ public class Lugar {
     private String nombre;
     private String descripcion;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "lugar_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "lugar_id")
     private List<Foto> fotos;
 
     @ManyToMany
