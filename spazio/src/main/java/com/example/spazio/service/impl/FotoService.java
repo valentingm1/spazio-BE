@@ -34,4 +34,6 @@ public class FotoService implements iFotoService {
         Foto fotoGuardada = fotoRepository.save(fotoEntity);
         return modelMapper.map(fotoGuardada, FotoSalidaDTO.class);
     }
+
+
 }

@@ -17,12 +17,15 @@ public class Lugar {
     private String nombre;
     private String descripcion;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "lugar_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "lugar_id")
     private List<Foto> fotos;
 
-    @Nullable
-    private List<String> caracteristicas;
+    @ManyToMany
+    @JoinTable(
+            name = "lugar_caracteristica",
+            joinColumns = @JoinColumn(name = "Lugar_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    private List<Caracteristica> caracteristicas;
 
     @ManyToMany
     @JoinTable(
@@ -35,12 +38,14 @@ public class Lugar {
         // Constructor vacío requerido por JPA
     }
 
-    public Lugar(String nombre, String descripcion, List<Foto> fotos, List<String> caracteristicas) {
+    public Lugar(String nombre, String descripcion, List<Foto> fotos, List<Caracteristica> caracteristicas, List<Categoria> categorias) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
+        this.categorias = categorias;
     }
+
 
     public Long getId() {
         return id;
@@ -74,12 +79,20 @@ public class Lugar {
         this.fotos = fotos;
     }
 
-    public List<String> getCaracteristicas() {
+
+    public List<Caracteristica> getCaracteristicas() {
         return caracteristicas;
     }
 
-    public void setCaracteristicas(List<String> caracteristicas) {
+    public void setCaracteristicas(List<Caracteristica> caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
 
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
 }

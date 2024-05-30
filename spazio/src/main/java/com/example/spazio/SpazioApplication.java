@@ -1,15 +1,15 @@
 package com.example.spazio;
 
-import com.example.spazio.dto.entradaDTO.UsuarioEntradaDTO;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class SpazioApplication {
@@ -21,8 +21,25 @@ public class SpazioApplication {
 
 	@Bean
 	public ModelMapper modelMapper() {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration()
+				.setMatchingStrategy(MatchingStrategies.STRICT);
 		return new ModelMapper();
 	}
+
+	@Configuration
+	public class AppConfig implements WebMvcConfigurer {
+
+		@Override
+		public void addCorsMappings(CorsRegistry registry) {
+			registry.addMapping("/**")
+					.allowedOrigins("http://localhost:5173")
+					.allowedMethods("GET", "POST", "PUT", "DELETE")
+					.allowCredentials(true);
+		}
+	}
+
+
 
 //	@Bean
 //	public PasswordEncoder passwordEncoder()

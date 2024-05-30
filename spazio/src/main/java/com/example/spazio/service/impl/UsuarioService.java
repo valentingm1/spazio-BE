@@ -71,4 +71,12 @@ public class UsuarioService implements iUsuarioService {
     }
 
 
+    public UsuarioSalidaDTO buscarUsuarioPorEmail(String email) {
+        LOGGER.info("Buscando usuario por EMAIL: {}", email);
+        Usuario usuarioBuscado = usuarioRepository.findByEmail(email);
+        UsuarioSalidaDTO usuarioSalidaDTO = usuarioBuscado != null ? modelMapper.map(usuarioBuscado, UsuarioSalidaDTO.class) : null;
+        LOGGER.info("Usuario encontrado: {}", usuarioSalidaDTO);
+        return usuarioSalidaDTO;
+    }
+
 }

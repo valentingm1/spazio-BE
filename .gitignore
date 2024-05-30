@@ -1,1 +1,3 @@
 .env
+spazio/src/main/resources/application.properties
+.idea/

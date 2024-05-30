@@ -1,13 +1,13 @@
 package com.example.spazio.entity;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.TypeAlias;
 
 import java.util.List;
 
 @Entity
-@Table(name = "categorias")
-public class Categoria {
-
+@Table(name = "caracteristicas")
+public class Caracteristica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,24 +18,15 @@ public class Categoria {
 
 
 
-    @ManyToMany(mappedBy = "categorias")
+    @ManyToMany(mappedBy = "caracteristicas")
     private List<Lugar> lugares;
 
-
-    public Categoria() {
+    public Caracteristica() {
     }
 
-    public Categoria(String nombre, List<Lugar> lugares) {
+    public Caracteristica(String nombre, List<Lugar> lugares) {
         this.nombre = nombre;
         this.lugares = lugares;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
 
@@ -45,6 +36,14 @@ public class Categoria {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public List<Lugar> getLugares() {

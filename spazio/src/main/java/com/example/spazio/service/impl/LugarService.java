@@ -3,7 +3,12 @@ package com.example.spazio.service.impl;
 import com.example.spazio.dto.entradaDTO.LugarEntradaDTO;
 import com.example.spazio.dto.modDTO.LugarModEntradaDTO;
 import com.example.spazio.dto.salidaDTO.LugarSalidaDTO;
+import com.example.spazio.entity.Caracteristica;
+import com.example.spazio.entity.Categoria;
+import com.example.spazio.entity.Foto;
 import com.example.spazio.entity.Lugar;
+import com.example.spazio.repository.CaracteristicaRepository;
+import com.example.spazio.repository.CategoriaRepository;
 import com.example.spazio.repository.LugarRepository;
 import com.example.spazio.service.iLugarService;
 import org.modelmapper.ModelMapper;
@@ -19,18 +24,36 @@ public class LugarService implements iLugarService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(LugarService.class);
     private final LugarRepository lugarRepository;
+    private final CategoriaRepository categoriaRepository;
+    private final CaracteristicaRepository caracteristicaRepository;
     private final ModelMapper modelMapper;
 
-    public LugarService(LugarRepository lugarRepository, ModelMapper modelMapper) {
+    public LugarService(LugarRepository lugarRepository, CategoriaRepository categoriaRepository, CaracteristicaRepository caracteristicaRepository, ModelMapper modelMapper) {
         this.lugarRepository = lugarRepository;
+        this.categoriaRepository = categoriaRepository;
+        this.caracteristicaRepository = caracteristicaRepository;
         this.modelMapper = modelMapper;
         configureMapping();
     }
 
-    @Override
     public LugarSalidaDTO agregarLugar(LugarEntradaDTO lugarDto) {
         LOGGER.info("Agregando lugar: {}", lugarDto.toString());
+
         Lugar lugar = modelMapper.map(lugarDto, Lugar.class);
+
+        // Convertir IDs de categorías a entidades de categorías
+        List<Categoria> categorias = lugarDto.getCategorias().stream()
+                .map(categoriaId -> categoriaRepository.findById(categoriaId)
+                        .orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada")))
+                .collect(Collectors.toList());
+        lugar.setCategorias(categorias);
+
+        List<Caracteristica> caracteristicas = lugarDto.getCaracteristicas().stream()
+                .map(caracteristicaId -> caracteristicaRepository.findById(caracteristicaId)
+                        .orElseThrow(() -> new IllegalArgumentException("Característica no encontrada con ID: " + caracteristicaId)))
+                .collect(Collectors.toList());
+        lugar.setCaracteristicas(caracteristicas);
+
         Lugar lugarPersistido = lugarRepository.save(lugar);
         LugarSalidaDTO lugarSalidaDTO = modelMapper.map(lugarPersistido, LugarSalidaDTO.class);
         LOGGER.info("Lugar agregado exitosamente: {}", lugarSalidaDTO.toString());
@@ -66,27 +89,48 @@ public class LugarService implements iLugarService {
     }
 
     @Override
-    public LugarSalidaDTO actualizarLugar(LugarModEntradaDTO lugar) {
-        Lugar LugarRecibido = modelMapper.map(lugar, Lugar.class);
-        Lugar LugarAActualizar = lugarRepository.findById(LugarRecibido.getId()).orElse(null);
+    public LugarSalidaDTO actualizarLugar(LugarModEntradaDTO lugarModDto) {
+        Long id = lugarModDto.getId();
+        LOGGER.info("Actualizando lugar con ID: {}", id);
 
-        LugarSalidaDTO LugarSalidaDto = null;
+        Lugar lugarExistente = lugarRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Lugar no encontrado con ID: " + id));
 
-        if (LugarAActualizar != null) {
-            LugarAActualizar = LugarRecibido;
-            lugarRepository.save(LugarAActualizar);
-
-            LugarSalidaDto = modelMapper.map(LugarAActualizar, LugarSalidaDTO.class);
-            LOGGER.warn("Paciente actualizado: {}", LugarSalidaDto.toString());
-
-        } else {
-            LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
-            //lanzar excepcion correspondiente
+        // Actualizar los campos del lugar existente con los valores del DTO
+        if (lugarModDto.getNombre() != null) {
+            lugarExistente.setNombre(lugarModDto.getNombre());
+        }
+        if (lugarModDto.getDescripcion() != null) {
+            lugarExistente.setDescripcion(lugarModDto.getDescripcion());
         }
 
+        // Convertir IDs de categorías a entidades de categorías
+        if (lugarModDto.getCategorias() != null) {
+            List<Categoria> categorias = lugarModDto.getCategorias().stream()
+                    .map(categoriaId -> categoriaRepository.findById(categoriaId)
+                            .orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada con ID: " + categoriaId)))
+                    .collect(Collectors.toList());
+            lugarExistente.setCategorias(categorias);
+        }
 
-        return LugarSalidaDto;
+        // Convertir IDs de características a entidades de características
+        if (lugarModDto.getCaracteristicas() != null) {
+            List<Caracteristica> caracteristicas = lugarModDto.getCaracteristicas().stream()
+                    .map(caracteristicaId -> caracteristicaRepository.findById(caracteristicaId)
+                            .orElseThrow(() -> new IllegalArgumentException("Característica no encontrada con ID: " + caracteristicaId)))
+                    .collect(Collectors.toList());
+            lugarExistente.setCaracteristicas(caracteristicas);
+        }
+
+        // Actualizar las fotos existentes
+
+
+        Lugar lugarActualizado = lugarRepository.save(lugarExistente);
+        LugarSalidaDTO lugarSalidaDTO = modelMapper.map(lugarActualizado, LugarSalidaDTO.class);
+        LOGGER.info("Lugar actualizado exitosamente: {}", lugarSalidaDTO.toString());
+        return lugarSalidaDTO;
     }
+
 
     private void configureMapping() {
         // Mapeo de LugarEntradaDTO a Lugar

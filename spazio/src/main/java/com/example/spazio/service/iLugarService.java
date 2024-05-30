@@ -15,5 +15,5 @@ public interface iLugarService {
 
     void eliminarLugar(Long id);
 
-    LugarSalidaDTO actualizarLugar(LugarModEntradaDTO lugar);
+    LugarSalidaDTO actualizarLugar(LugarModEntradaDTO lugarModDto);
 }

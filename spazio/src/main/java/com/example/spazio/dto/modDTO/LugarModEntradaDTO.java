@@ -1,5 +1,7 @@
 package com.example.spazio.dto.modDTO;
 
+import com.example.spazio.dto.entradaDTO.CaracteristicaEntradaDTO;
+import com.example.spazio.dto.entradaDTO.CategoriaEntradaDTO;
 import com.example.spazio.dto.entradaDTO.FotoEntradaDTO;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -27,22 +29,22 @@ public class LugarModEntradaDTO {
 
     @NotNull(message = "Las características no pueden ser nulas")
     @NotEmpty(message = "Debe contener por lo menos una caracteristica")
-    private List<String> caracteristicas;
+    private List<Long> caracteristicas;
 
     @NotNull(message ="Las categorias no pueden ser nulas")
     @NotEmpty(message = "Debe haber por lo menos una categoria")
-    private List<Long> categoriaIds; // IDs de las categorías asociadas
+    private List<Long> categorias; // IDs de las categorías asociadas
 
     public LugarModEntradaDTO() {
     }
 
-    public LugarModEntradaDTO(Long id, String nombre, String descripcion, List<FotoEntradaDTO> fotos, List<String> caracteristicas, List<Long> categoriaIds) {
+    public LugarModEntradaDTO(Long id, String nombre, String descripcion, List<FotoEntradaDTO> fotos, List<Long> caracteristicas, List<Long> categorias) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
-        this.categoriaIds = categoriaIds;
+        this.categorias = categorias;
     }
 
     public Long getId() {
@@ -78,20 +80,21 @@ public class LugarModEntradaDTO {
         this.fotos = fotos;
     }
 
-    public List<String> getCaracteristicas() {
+
+    public List<Long> getCaracteristicas() {
         return caracteristicas;
     }
 
-    public List<Long> getCategoriaIds() {
-        return categoriaIds;
-    }
-
-    public void setCategoriaIds(List<Long> categoriaIds) {
-        this.categoriaIds = categoriaIds;
-    }
-
-    public void setCaracteristicas(List<String> caracteristicas) {
+    public void setCaracteristicas(List<Long> caracteristicas) {
         this.caracteristicas = caracteristicas;
+    }
+
+    public List<Long> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Long> categorias) {
+        this.categorias = categorias;
     }
 
     @Override
@@ -102,6 +105,7 @@ public class LugarModEntradaDTO {
                 ", descripcion='" + descripcion + '\'' +
                 ", fotos=" + fotos +
                 ", caracteristicas=" + caracteristicas +
+                ", categorias=" + categorias +
                 '}';
     }
 }

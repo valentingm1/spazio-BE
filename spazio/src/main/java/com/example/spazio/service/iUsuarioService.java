@@ -13,6 +13,8 @@ public interface iUsuarioService {
 
     UsuarioSalidaDTO buscarUsuarioPorId(Long id);
 
+    UsuarioSalidaDTO buscarUsuarioPorEmail(String email);
+
     void eliminarUsuario(Long id);
 
 }
