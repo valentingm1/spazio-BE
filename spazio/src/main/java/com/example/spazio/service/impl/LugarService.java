@@ -54,6 +54,17 @@ public class LugarService implements iLugarService {
                 .collect(Collectors.toList());
         lugar.setCaracteristicas(caracteristicas);
 
+        // Añadir fotos al lugar
+        List<Foto> fotos = lugarDto.getFotos().stream()
+                .map(fotoDto -> {
+                    Foto foto = new Foto();
+                    foto.setRutaFoto(fotoDto.getRutaFoto());
+                    foto.setLugar(lugar); // Asegúrate de que se establezca la relación inversa
+                    return foto;
+                })
+                .collect(Collectors.toList());
+        lugar.setFotos(fotos);
+
         Lugar lugarPersistido = lugarRepository.save(lugar);
         LugarSalidaDTO lugarSalidaDTO = modelMapper.map(lugarPersistido, LugarSalidaDTO.class);
         LOGGER.info("Lugar agregado exitosamente: {}", lugarSalidaDTO.toString());
