@@ -26,6 +26,18 @@ public class LugarController {
         return new ResponseEntity<>(LugarService.buscarLugarPorId(id), HttpStatus.OK);
     }
 
+    @GetMapping("/buscarPorNombre")
+    public ResponseEntity<List<LugarSalidaDTO>> buscarLugaresPorNombre(@RequestParam String nombre) {
+        List<LugarSalidaDTO> lugares = LugarService.buscarLugaresPorNombre(nombre);
+        return new ResponseEntity<>(lugares, HttpStatus.OK);
+    }
+
+    @GetMapping("/buscarPorCategoria")
+    public ResponseEntity<List<LugarSalidaDTO>> buscarLugaresPorCategoria(@RequestParam Long categoriaId) {
+        List<LugarSalidaDTO> lugares = LugarService.buscarLugaresPorCategoria(categoriaId);
+        return new ResponseEntity<>(lugares, HttpStatus.OK);
+    }
+
     @PostMapping("/agregar")
     public ResponseEntity<LugarSalidaDTO> agregarLugar(@RequestBody @Validated LugarEntradaDTO lugar){
         return new ResponseEntity<>(LugarService.agregarLugar(lugar), HttpStatus.CREATED);

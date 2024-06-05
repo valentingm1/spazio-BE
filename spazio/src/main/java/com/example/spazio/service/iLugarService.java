@@ -16,4 +16,9 @@ public interface iLugarService {
     void eliminarLugar(Long id);
 
     LugarSalidaDTO actualizarLugar(LugarModEntradaDTO lugarModDto);
+
+    List<LugarSalidaDTO> buscarLugaresPorNombre(String nombre);
+
+
+    List<LugarSalidaDTO> buscarLugaresPorCategoria(Long categoriaId);
 }

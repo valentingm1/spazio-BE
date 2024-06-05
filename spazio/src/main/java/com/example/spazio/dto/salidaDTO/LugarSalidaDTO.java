@@ -6,6 +6,7 @@ public class LugarSalidaDTO {
     private Long id;
     private String nombre;
     private String descripcion;
+    private List<String> politicasUso;
     private List<FotoSalidaDTO> fotos;
     private List<CaracteristicaSalidaDTO> caracteristicas;
     private List<CategoriaSalidaDTO> categorias;
@@ -13,15 +14,25 @@ public class LugarSalidaDTO {
     public LugarSalidaDTO() {
     }
 
-    public LugarSalidaDTO(Long id, String nombre, String descripcion, List<FotoSalidaDTO> fotos, List<CaracteristicaSalidaDTO> caracteristicas, List<CategoriaSalidaDTO> categorias) {
+
+    public LugarSalidaDTO(Long id, String nombre, String descripcion, List<String> politicasUso, List<FotoSalidaDTO> fotos, List<CaracteristicaSalidaDTO> caracteristicas, List<CategoriaSalidaDTO> categorias) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.politicasUso = politicasUso;
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
         this.categorias = categorias;
     }
 
+
+    public List<String> getPoliticasUso() {
+        return politicasUso;
+    }
+
+    public void setPoliticasUso(List<String> politicasUso) {
+        this.politicasUso = politicasUso;
+    }
 
     public List<CaracteristicaSalidaDTO> getCaracteristicas() {
         return caracteristicas;

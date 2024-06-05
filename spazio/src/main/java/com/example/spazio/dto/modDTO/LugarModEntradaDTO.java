@@ -19,6 +19,8 @@ public class LugarModEntradaDTO {
     @NotEmpty
     private String nombre;
 
+    private List<String> politicasUso;
+
     @NotNull
     @Size(min = 10, message = "La descripción debe tener al menos 11 letras")
     private String descripcion;
@@ -38,13 +40,22 @@ public class LugarModEntradaDTO {
     public LugarModEntradaDTO() {
     }
 
-    public LugarModEntradaDTO(Long id, String nombre, String descripcion, List<FotoEntradaDTO> fotos, List<Long> caracteristicas, List<Long> categorias) {
+    public LugarModEntradaDTO(Long id, String nombre, List<String> politicasUso, String descripcion, List<FotoEntradaDTO> fotos, List<Long> caracteristicas, List<Long> categorias) {
         this.id = id;
         this.nombre = nombre;
+        this.politicasUso = politicasUso;
         this.descripcion = descripcion;
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
         this.categorias = categorias;
+    }
+
+    public List<String> getPoliticasUso() {
+        return politicasUso;
+    }
+
+    public void setPoliticasUso(List<String> politicasUso) {
+        this.politicasUso = politicasUso;
     }
 
     public Long getId() {

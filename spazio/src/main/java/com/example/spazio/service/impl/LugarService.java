@@ -3,10 +3,7 @@ package com.example.spazio.service.impl;
 import com.example.spazio.dto.entradaDTO.LugarEntradaDTO;
 import com.example.spazio.dto.modDTO.LugarModEntradaDTO;
 import com.example.spazio.dto.salidaDTO.LugarSalidaDTO;
-import com.example.spazio.entity.Caracteristica;
-import com.example.spazio.entity.Categoria;
-import com.example.spazio.entity.Foto;
-import com.example.spazio.entity.Lugar;
+import com.example.spazio.entity.*;
 import com.example.spazio.repository.CaracteristicaRepository;
 import com.example.spazio.repository.CategoriaRepository;
 import com.example.spazio.repository.LugarRepository;
@@ -64,6 +61,10 @@ public class LugarService implements iLugarService {
                 })
                 .collect(Collectors.toList());
         lugar.setFotos(fotos);
+
+        lugar.setPoliticasDeUso(lugarDto.getPoliticasUso());
+
+
 
         Lugar lugarPersistido = lugarRepository.save(lugar);
         LugarSalidaDTO lugarSalidaDTO = modelMapper.map(lugarPersistido, LugarSalidaDTO.class);
@@ -135,12 +136,50 @@ public class LugarService implements iLugarService {
 
         // Actualizar las fotos existentes
 
+        List<Foto> fotos = lugarModDto.getFotos().stream()
+                .map(fotoDto -> {
+                    Foto foto = new Foto();
+                    foto.setRutaFoto(fotoDto.getRutaFoto());
+                    foto.setLugar(lugarExistente); // Asegúrate de que se establezca la relación inversa
+                    return foto;
+                })
+                .collect(Collectors.toList());
+        lugarExistente.setFotos(fotos);
+
+
+
+        lugarExistente.setPoliticasDeUso(lugarModDto.getPoliticasUso());
 
         Lugar lugarActualizado = lugarRepository.save(lugarExistente);
         LugarSalidaDTO lugarSalidaDTO = modelMapper.map(lugarActualizado, LugarSalidaDTO.class);
         LOGGER.info("Lugar actualizado exitosamente: {}", lugarSalidaDTO.toString());
         return lugarSalidaDTO;
     }
+
+
+
+    @Override
+    public List<LugarSalidaDTO> buscarLugaresPorNombre(String nombre) {
+        LOGGER.info("Buscando lugares por nombre que contienen: {}", nombre);
+        List<Lugar> lugares = lugarRepository.findAllByNombreContainingIgnoreCase(nombre);
+        List<LugarSalidaDTO> resultado = lugares.stream()
+                .map(lugar -> modelMapper.map(lugar, LugarSalidaDTO.class))
+                .collect(Collectors.toList());
+        LOGGER.info("Se encontraron {} lugares", resultado.size());
+        return resultado;
+    }
+
+    @Override
+    public List<LugarSalidaDTO> buscarLugaresPorCategoria(Long categoriaId) {
+        LOGGER.info("Buscando lugares por categoría con ID: {}", categoriaId);
+        List<Lugar> lugares = lugarRepository.findAllByCategorias(categoriaId);
+        List<LugarSalidaDTO> resultado = lugares.stream()
+                .map(lugar -> modelMapper.map(lugar, LugarSalidaDTO.class))
+                .collect(Collectors.toList());
+        LOGGER.info("Se encontraron {} lugares", resultado.size());
+        return resultado;
+    }
+
 
 
     private void configureMapping() {
@@ -154,6 +193,7 @@ public class LugarService implements iLugarService {
                 .addMapping(Lugar::getFotos, LugarSalidaDTO::setFotos);
 
     }
+
 
 
 }

@@ -16,6 +16,8 @@ public class LugarEntradaDTO {
     @Size(min = 10, message = "La descripción debe tener al menos 11 letras")
     private String descripcion;
 
+    private List<String> politicasUso;
+
     @NotNull(message = "La lista de fotos no puede ser nula")
     @NotEmpty(message = "La lista de fotos no puede estar vacía")
     private List<FotoEntradaDTO> fotos;
@@ -31,12 +33,21 @@ public class LugarEntradaDTO {
     public LugarEntradaDTO() {
     }
 
-    public LugarEntradaDTO(String nombre, String descripcion, List<FotoEntradaDTO> fotos, List<Long> caracteristicas, List<Long> categorias) {
+    public LugarEntradaDTO(String nombre, String descripcion, List<String> politicasUso, List<FotoEntradaDTO> fotos, List<Long> caracteristicas, List<Long> categorias) {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.politicasUso = politicasUso;
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
         this.categorias = categorias;
+    }
+
+    public List<String> getPoliticasUso() {
+        return politicasUso;
+    }
+
+    public void setPoliticasUso(List<String> politicasUso) {
+        this.politicasUso = politicasUso;
     }
 
     public String getNombre() {
