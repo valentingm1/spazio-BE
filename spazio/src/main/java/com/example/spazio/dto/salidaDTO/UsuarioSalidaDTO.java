@@ -1,31 +1,28 @@
 package com.example.spazio.dto.salidaDTO;
 
 
+import java.util.List;
 
 public class UsuarioSalidaDTO {
 
     private Long id;
-
     private String nombre;
-
     private String apellido;
-
     private String email;
-
-    private String tipoUsuario;
-
     private String firebase;
-
+    private String tipoUsuario;
+    private List<LugarSalidaDTO> lugaresFavoritos;
     public UsuarioSalidaDTO() {
     }
 
-    public UsuarioSalidaDTO(Long id, String nombre, String apellido, String email, String tipoUsuario, String firebase) {
+    public UsuarioSalidaDTO(Long id, String nombre, String apellido, String email, String firebase, String tipoUsuario, List<LugarSalidaDTO> lugaresFavoritos) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.tipoUsuario = tipoUsuario;
         this.firebase = firebase;
+        this.tipoUsuario = tipoUsuario;
+        this.lugaresFavoritos = lugaresFavoritos;
     }
 
     public String getTipoUsuario() {
@@ -76,5 +73,13 @@ public class UsuarioSalidaDTO {
     public void setFirebase(String firebase) {
         this.firebase = firebase;
 
+    }
+
+    public List<LugarSalidaDTO> getLugaresFavoritos() {
+        return lugaresFavoritos;
+    }
+
+    public void setLugaresFavoritos(List<LugarSalidaDTO> lugaresFavoritos) {
+        this.lugaresFavoritos = lugaresFavoritos;
     }
 }

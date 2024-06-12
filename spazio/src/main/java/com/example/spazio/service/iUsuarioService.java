@@ -17,4 +17,5 @@ public interface iUsuarioService {
 
     void eliminarUsuario(Long id);
 
+    UsuarioSalidaDTO agregarLugarFavorito(Long usuarioId, Long lugarId);
 }

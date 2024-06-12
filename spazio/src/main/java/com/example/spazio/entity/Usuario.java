@@ -2,9 +2,12 @@ package com.example.spazio.entity;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name ="usuarios")
@@ -19,13 +22,25 @@ public class Usuario {
     private String email;
     private String password;
 
+    @ManyToMany
+    @JoinTable(
+            name = "usuario_lugar_favorito",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "lugar_id")
+    )
+    private List<Lugar> lugaresFavoritos = new ArrayList<>(); // Inicialización de la lista
+
+
 
     @NotBlank(message = "idFirebase no puede estar en blanco")
     @Size(min = 8, message = "idFirebase debe tener por lo menos 8 caracteres")
     private String firebase;
 
 
-    public Usuario(Long id, String nombre, String apellido, String email, String password, String firebase, @Nullable String tipoUsuario) {
+    @Nullable // Solución parche a tipos de usuario
+    private String tipoUsuario;
+
+    public Usuario(Long id, String nombre, String apellido, String email, String password, String firebase, String tipoUsuario) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -33,14 +48,11 @@ public class Usuario {
         this.password = password;
         this.firebase = firebase;
         this.tipoUsuario = tipoUsuario;
+        this.lugaresFavoritos = new ArrayList<>(); // Inicializa la lista en el constructor
     }
-
     public Usuario() {
     }
 
-
-    @Nullable // Solución parche a tipos de usuario
-    private String tipoUsuario;
 
 
     public Usuario(String nombre, String apellido, String email, String password, String tipoUsuario) {
@@ -105,5 +117,13 @@ public class Usuario {
 
     public void setFirebase(String firebase) {
         this.firebase = firebase;
+    }
+
+    public List<Lugar> getLugaresFavoritos() {
+        return lugaresFavoritos;
+    }
+
+    public void setLugaresFavoritos(List<Lugar> lugaresFavoritos) {
+        this.lugaresFavoritos = lugaresFavoritos;
     }
 }
