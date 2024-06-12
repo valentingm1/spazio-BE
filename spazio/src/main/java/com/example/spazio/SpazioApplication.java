@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SpazioApplication {
 
 	private static Logger logger = LoggerFactory.getLogger(SpazioApplication.class);
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpazioApplication.class, args);
 	}
@@ -33,18 +34,11 @@ public class SpazioApplication {
 		@Override
 		public void addCorsMappings(CorsRegistry registry) {
 			registry.addMapping("/**")
-					.allowedOrigins("http://localhost:5173") //cambiar a la ruta desde donde se manda la solucitud
+					.allowedOrigins("http://localhost:5173", "https://api.curso.spazioserver.online", "https://sprint-ii.vercel.app/", "https://www.spazioserver.app/") //cambiar a la ruta desde donde se manda la solucitud
 					.allowedMethods("GET", "POST", "PUT", "DELETE")
 					.allowCredentials(true);
 		}
 	}
 
-
-
-//	@Bean
-//	public PasswordEncoder passwordEncoder()
-//	{
-//		return new BCryptPasswordEncoder();
-//	}
 
 }
