@@ -4,6 +4,7 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,11 +37,14 @@ public class Lugar {
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private List<Categoria> categorias;
 
+    @OneToMany(mappedBy = "lugar", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserva> reservas = new ArrayList<>();
+
     public Lugar() {
         // Constructor vacío requerido por JPA
     }
 
-    public Lugar(Long id, String nombre, String descripcion, List<String> politicasDeUso, List<Foto> fotos, List<Caracteristica> caracteristicas, List<Categoria> categorias) {
+    public Lugar(Long id, String nombre, String descripcion, List<String> politicasDeUso, List<Foto> fotos, List<Caracteristica> caracteristicas, List<Categoria> categorias, List<Reserva> reservas) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -48,6 +52,7 @@ public class Lugar {
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
         this.categorias = categorias;
+        this.reservas = reservas;
     }
 
     public List<String> getPoliticasDeUso() {
@@ -105,5 +110,14 @@ public class Lugar {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 }
