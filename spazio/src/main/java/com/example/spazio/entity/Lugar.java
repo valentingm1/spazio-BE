@@ -40,11 +40,17 @@ public class Lugar {
     @OneToMany(mappedBy = "lugar", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas = new ArrayList<>();
 
+    @OneToMany(mappedBy = "lugar", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "lugar", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rating> ratings = new ArrayList<>();
+
     public Lugar() {
         // Constructor vacío requerido por JPA
     }
 
-    public Lugar(Long id, String nombre, String descripcion, List<String> politicasDeUso, List<Foto> fotos, List<Caracteristica> caracteristicas, List<Categoria> categorias, List<Reserva> reservas) {
+    public Lugar(Long id, String nombre, String descripcion, List<String> politicasDeUso, List<Foto> fotos, List<Caracteristica> caracteristicas, List<Categoria> categorias, List<Reserva> reservas, List<Review> reviews, List<Rating> ratings) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -53,6 +59,8 @@ public class Lugar {
         this.caracteristicas = caracteristicas;
         this.categorias = categorias;
         this.reservas = reservas;
+        this.reviews = reviews;
+        this.ratings = ratings;
     }
 
     public List<String> getPoliticasDeUso() {
@@ -119,5 +127,21 @@ public class Lugar {
 
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 }

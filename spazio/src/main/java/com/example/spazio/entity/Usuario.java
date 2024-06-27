@@ -43,7 +43,14 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas = new ArrayList<>();
 
-    public Usuario(Long id, String nombre, String apellido, String email, String password, List<Lugar> lugaresFavoritos, String firebase, String tipoUsuario, List<Reserva> reservas) {
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rating> ratings = new ArrayList<>();
+
+    public Usuario(Long id, String nombre, String apellido, String email, String password, List<Lugar> lugaresFavoritos, String firebase, String tipoUsuario, List<Reserva> reservas, List<Review> reviews, List<Rating> ratings) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -53,6 +60,8 @@ public class Usuario {
         this.firebase = firebase;
         this.tipoUsuario = tipoUsuario;
         this.reservas = reservas;
+        this.reviews = reviews;
+        this.ratings = ratings;
     }
 
     public Usuario() {
