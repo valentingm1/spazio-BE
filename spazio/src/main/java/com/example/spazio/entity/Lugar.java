@@ -17,6 +17,8 @@ public class Lugar {
     private String nombre;
     private String descripcion;
 
+    private List<String> politicasDeUso;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "lugar_id")
     private List<Foto> fotos;
 
@@ -38,14 +40,23 @@ public class Lugar {
         // Constructor vacío requerido por JPA
     }
 
-    public Lugar(String nombre, String descripcion, List<Foto> fotos, List<Caracteristica> caracteristicas, List<Categoria> categorias) {
+    public Lugar(Long id, String nombre, String descripcion, List<String> politicasDeUso, List<Foto> fotos, List<Caracteristica> caracteristicas, List<Categoria> categorias) {
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.politicasDeUso = politicasDeUso;
         this.fotos = fotos;
         this.caracteristicas = caracteristicas;
         this.categorias = categorias;
     }
 
+    public List<String> getPoliticasDeUso() {
+        return politicasDeUso;
+    }
+
+    public void setPoliticasDeUso(List<String> politicasDeUso) {
+        this.politicasDeUso = politicasDeUso;
+    }
 
     public Long getId() {
         return id;

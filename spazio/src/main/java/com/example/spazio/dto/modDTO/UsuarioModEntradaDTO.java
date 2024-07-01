@@ -1,31 +1,35 @@
-package com.example.spazio.dto.entradaDTO;
+package com.example.spazio.dto.modDTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class UsuarioEntradaDTO {
+public class UsuarioModEntradaDTO {
+    @NotBlank(message = "El id es obligatorio")
+    private Long id;
 
-    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
-
-    @NotBlank(message = "El apellido es obligatorio")
     private String apellido;
 
-    @NotBlank(message = "El email es obligatorio")
     @Email(message = "El email debe ser válido")
     private String email;
 
-    @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
     private String password;
 
-    @NotBlank(message = "El idFirebase no puede estar en blanco")
-    @Size(min = 8, message = "El idFirebase debe tener al menos 8 caracteres")
     private String firebase;
 
+    private String tipoUsuario;
 
     // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -66,4 +70,11 @@ public class UsuarioEntradaDTO {
         this.firebase = firebase;
     }
 
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
 }

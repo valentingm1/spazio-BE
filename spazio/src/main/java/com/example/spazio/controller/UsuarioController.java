@@ -27,6 +27,13 @@ public class UsuarioController {
     public ResponseEntity<UsuarioSalidaDTO> agregarUsuario(@Validated @RequestBody UsuarioEntradaDTO usuarioEntradaDTO) {
         return new ResponseEntity<>(UsuarioService.agregarUsuario(usuarioEntradaDTO), HttpStatus.CREATED);
     }
+    @PostMapping("/{usuarioId}/favoritos/{lugarId}")
+    public ResponseEntity<UsuarioSalidaDTO> agregarLugarFavorito(
+            @PathVariable Long usuarioId,
+            @PathVariable Long lugarId) {
+        UsuarioSalidaDTO usuarioSalidaDTO = UsuarioService.agregarLugarFavorito(usuarioId, lugarId);
+        return ResponseEntity.ok(usuarioSalidaDTO);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioSalidaDTO> buscarUsuarioPorId(@PathVariable Long id){
