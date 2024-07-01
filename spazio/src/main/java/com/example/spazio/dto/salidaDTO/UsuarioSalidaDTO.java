@@ -12,6 +12,7 @@ public class UsuarioSalidaDTO {
     private String firebase;
     private String tipoUsuario;
     private List<LugarSalidaDTO> lugaresFavoritos;
+
     public UsuarioSalidaDTO() {
     }
 

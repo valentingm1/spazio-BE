@@ -40,20 +40,17 @@ public class Usuario {
     @Nullable // Solución parche a tipos de usuario
     private String tipoUsuario;
 
-    public Usuario(Long id, String nombre, String apellido, String email, String password, String firebase, String tipoUsuario) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.password = password;
-        this.firebase = firebase;
-        this.tipoUsuario = tipoUsuario;
-        this.lugaresFavoritos = new ArrayList<>(); // Inicializa la lista en el constructor
-    }
-    public Usuario() {
-    }
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserva> reservas = new ArrayList<>();
 
-    public Usuario(Long id, String nombre, String apellido, String email, String password, List<Lugar> lugaresFavoritos, String firebase, @Nullable String tipoUsuario) {
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rating> ratings = new ArrayList<>();
+
+    public Usuario(Long id, String nombre, String apellido, String email, String password, List<Lugar> lugaresFavoritos, String firebase, String tipoUsuario, List<Reserva> reservas, List<Review> reviews, List<Rating> ratings) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -62,15 +59,14 @@ public class Usuario {
         this.lugaresFavoritos = lugaresFavoritos;
         this.firebase = firebase;
         this.tipoUsuario = tipoUsuario;
+        this.reservas = reservas;
+        this.reviews = reviews;
+        this.ratings = ratings;
     }
 
-    public Usuario(String nombre, String apellido, String email, String password, String tipoUsuario) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.password = password;
-        this.tipoUsuario = tipoUsuario;
+    public Usuario() {
     }
+
 
     public String getNombre() {
         return nombre;
@@ -134,5 +130,13 @@ public class Usuario {
 
     public void setLugaresFavoritos(List<Lugar> lugaresFavoritos) {
         this.lugaresFavoritos = lugaresFavoritos;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 }
